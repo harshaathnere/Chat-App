@@ -5,19 +5,22 @@ const ChatFeed = (props) => {
     //console.log(props)
     const {chats, activeChat, userName, messages } = props;
     const chat = chats && chats[activeChat];
-
+         
     const renderMessages = () => {
         const keys = Object.keys(messages);
         console.log(keys);
          return keys.map((key,index)=>{
              const message = messages[key];
-             const lastMessage = index ===0 ? null : keys[index-1];
+             const lastMessageKey = index ===0 ? null : keys[index-1];
              const isMyMessage = userName === message.sender.userName;
               return(
                   <div key ={`msg_${index}`} style={{width: "100%"}}>
                   <div className="message-block">
                   {
-                      isMyMessage ? <MyMessage/> : <TheirMessage/>
+                      isMyMessage ? 
+                    <MyMessage message={message}/> : 
+
+                    <TheirMessage message={message} lastMessage={messages[lastMessageKey]}/>
                   }
 
                   </div>
@@ -30,12 +33,25 @@ const ChatFeed = (props) => {
 
          })
     }
-    renderMessages();
-
+ 
+ if(!chat) return 'Loading.....'
   return(
-      <div>
-          ChatFeed
-      </div>
+      <div className="chat-feed">
+          
+           <div className="chat-title-container">
+             <div className="chat-title">  {chat?.title} </div>
+               <div className="chat-subtitle">
+                   {chat.people.map((person)=> `${person.person.userName}`)}
+                    </div>
+                   </div>
+{   renderMessages()}
+<div style={{height: '100px'}}/>
+<div className="message-form-container"> 
+<MessageForum {...props} chatId={activeChat}  />
+</div>
+                    </div>
+     
+      
   )
 }
 export default ChatFeed
