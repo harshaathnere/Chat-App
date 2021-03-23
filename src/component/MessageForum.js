@@ -1,3 +1,4 @@
+import { PictureOutlined } from '@ant-design/icons';
 import {useState} from 'react';
 import {sendMessage, isTyping} from 'react-chat-engine';
 
@@ -13,12 +14,16 @@ const MessageForum =(props) => {
                setValue('');
             }
     }
+    const handleUpload = (event) => {
+        sendMessage();
+
+    }
     const handleChange = (event) => {
     setValue(event.target.value)
         isTyping(props, chatId)
     }
     return(
-        <div className="message-forum" onSubmit={handleSubmit}>
+        <form className="message-forum" onSubmit={handleSubmit}>
         <input
             className="message-input"
             placeholder="Send a message"
@@ -26,8 +31,22 @@ const MessageForum =(props) => {
             onChange={handleChange}
             onSubmit={handleSubmit}
         />
+<label htmlFor="upload-button">
+<span className="image-button">
+<PictureOutlined className="picture-icon"/>
+</span>
+
+</label>
+<input
+    type="file"
+    multiple={false}
+    id="upload-button"
+    style={{display: 'none'}}
+    onChange={handleUpload}
+/>
+       
            
-        </div>
+        </form>
     )
 
 }
