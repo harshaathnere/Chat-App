@@ -1,4 +1,4 @@
-import { PictureOutlined } from '@ant-design/icons';
+import { PictureOutlined, SendOutlined } from '@ant-design/icons';
 import {useState} from 'react';
 import {sendMessage, isTyping} from 'react-chat-engine';
 
@@ -15,7 +15,7 @@ const MessageForum =(props) => {
             }
     }
     const handleUpload = (event) => {
-        sendMessage();
+        sendMessage(creds,chatId,{files: event.target.files});
 
     }
     const handleChange = (event) => {
@@ -44,8 +44,8 @@ const MessageForum =(props) => {
     style={{display: 'none'}}
     onChange={handleUpload}
 />
-       
-           
+     <button type="submit" className="send-button"></button>  
+           <SendOutlined className="sen-icon"/>
         </form>
     )
 
