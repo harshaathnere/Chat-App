@@ -15,7 +15,7 @@ const LoginForm = () => {
              localStorage.setItem('password', password)
              window.location.reload();
             } catch (error) {
-                setError('Oops , inoccrect credentials')
+                setError('Oops , incorrect credentials')
             }
             // username\| password => chatEngine => give message
             // works out logged in
