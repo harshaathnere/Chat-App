@@ -10,7 +10,7 @@ import ChatFeed from './component/ChatFeed'
          <ChatEngine
            height="100vh"
            projectID="71dba857-eb84-4411-a2a9-bb00d1fe1082"
-           userName="Harsha"
+           userName={localStorage.getItem('username')}
            userSecret="12345678"
           renderChatFeed = {(chatAppProps) =><ChatFeed{...chatAppProps}/>}
 
